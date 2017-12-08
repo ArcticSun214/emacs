@@ -47,6 +47,10 @@
 
 
 ;; evil mode
+;; Persistent highlights on evil mode search
+(setq evil-search-module 'evil-search)
+
+;; Enable evil mode
 (require 'evil)
 (evil-mode 1)
 
@@ -55,13 +59,8 @@
 (setq evil-insert-state-modes nil)
 (setq evil-motion-state-modes nil)
 
-;; Persistent highlights on evil mode search
-(require 'highlight)
-(require 'evil-search-highlight-persist)
-(global-evil-search-highlight-persist t)
-
-;; To only display string whose length is greater than or equal to 3
-;; (setq evil-search-highlight-string-min-len 3)
+;; Make searches case sensitive
+(setq evil-ex-search-case 'sensitive)
 
 ;; Back Button
 (require 'back-button)
@@ -73,3 +72,12 @@
 ;;; From https://emacs.stackexchange.com/questions/30137/paste-windows-clipboard-with-shift-insert-but-not-by-yanking
 ;; Paste from clipboard
 (global-set-key (kbd "<S-Insert>") #'clipboard-yank)
+
+;; Display line numbers
+(global-linum-mode 1)
+
+;; Switch to previous buffer
+(global-set-key (kbd "M-o") 'mode-line-other-buffer)
+
+;; Disable 'K' key binding. This was determined by "C-h K"
+(define-key evil-motion-state-map "K" nil)
